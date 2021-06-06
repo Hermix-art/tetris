@@ -25,10 +25,7 @@ class Tetris {
         int score = 0;
         do {
             moved = false;
-
             playfield.nextBlock();
-            score++;
-
             boolean nextMove;
             do {
                 waiter.waitForIt();
@@ -39,6 +36,8 @@ class Tetris {
                 }
             } while (nextMove);
 
+            score++;
+            waiter.speedTheGame(score);
         } while (moved);
 
         if (player instanceof HumanPlayer)
