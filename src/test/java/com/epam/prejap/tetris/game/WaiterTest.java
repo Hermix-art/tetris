@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
  * @author Herman Kulik
  */
 public class WaiterTest {
-    private static final int threshold = 25;
+    private static final int THRESHOLD = 30;
     private static int delay;
 
     @Factory(dataProvider = "dataMethod")
@@ -28,19 +28,19 @@ public class WaiterTest {
         };
     }
 
-    @Test(timeOut = 500 + threshold)
+    @Test(timeOut = 500 + THRESHOLD)
     public void waiterShouldWaitFor500millisTime() {
         Waiter waiter = new Waiter(500);
         waiter.waitForIt();
     }
 
-    @Test(timeOut = 400 + threshold)
+    @Test(timeOut = 400 + THRESHOLD)
     public void waiterShouldWaitFor400millisTime() {
         Waiter waiter = new Waiter(400);
         waiter.waitForIt();
     }
 
-    @Test(timeOut = threshold)
+    @Test(timeOut = THRESHOLD)
     public void waiterShouldNotWait() {
         Waiter waiter = new Waiter(0);
         waiter.waitForIt();
