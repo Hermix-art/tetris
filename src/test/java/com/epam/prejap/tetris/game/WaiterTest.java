@@ -6,7 +6,7 @@ import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
- * Tests delays of {@link Waiter}
+ * Tests  {@link Waiter} delays
  *
  * @author Herman Kulik
  */
