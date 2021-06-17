@@ -8,46 +8,49 @@ import java.util.concurrent.TimeUnit;
  * @author Herman Kulik
  */
 public class Waiter {
-
-    private int milliseconds;
+    private final int milliseconds;
+    private int adjustment;
 
     /**
-     * Initializes a Waiter with starting delay value in ms
+     * Initializes a Waiter with starting delay value in milliseconds
      *
-     * @param milliseconds starting value of delay in ms
+     * @param milliseconds starting value of delay in milliseconds
      */
     public Waiter(int milliseconds) {
         this.milliseconds = milliseconds;
     }
 
     /**
-     * Provides a delay, making executing thread sleep for a current quantity of milliseconds
+     * Provides a delay, making executing thread sleep for preliminary milliseconds quantity, decreased by current adjustment
+     * set by {@link #speedTheGame(int)}
      */
     public void waitForIt() {
         try {
-            TimeUnit.MILLISECONDS.sleep(milliseconds);
+            TimeUnit.MILLISECONDS.sleep(milliseconds - adjustment);
         } catch (InterruptedException ignore) {
         }
     }
 
     /**
-     * Decreases delay between cycles of the game by 100 ms every 10 points
+     * Increases adjustment in milliseconds by 100 milliseconds every 10 points
+     * what leads to delay increase between cycles of the game when {@link #waitForIt()} method is invoked
      *
      * @param score current score of the game
-     * @implNote delay may be decreased only if current delay is higher or equals to 100 ms, as delay value cannot be negative
+     * @implNote adjustment may be increased only if potentially adjusted delay is higher or equals to 100 milliseconds,
+     * as delay cannot be negative
      */
     public void speedTheGame(int score) {
-        if ((score % 10) == 0 && milliseconds >= 100) {
-            milliseconds = milliseconds - 100;
+        if ((score % 10) == 0 && (milliseconds - adjustment) >= 100) {
+            adjustment += 100;
         }
     }
 
     /**
-     * Returns current delay value in ms
+     * Returns adjusted delay value in milliseconds
      *
      * @return milliseconds
      */
     int getMilliseconds() {
-        return milliseconds;
+        return milliseconds - adjustment;
     }
 }
