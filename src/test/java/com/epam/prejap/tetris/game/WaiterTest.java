@@ -1,12 +1,13 @@
 package com.epam.prejap.tetris.game;
 
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.*;
+
 /**
- * Tests  {@link Waiter} delays
+ * Tests {@link Waiter} delays
  *
  * @author Herman Kulik
  */
@@ -19,21 +20,27 @@ public class WaiterTest {
         delay = newDelay;
     }
 
-    @Test(timeOut = 500 + THRESHOLD, groups = "delays")
+    @Test(timeOut = 500 + THRESHOLD, groups = "timeoutPossible")
     void waiterShouldWaitFor500millisTime() {
         Waiter waiter = new Waiter(500);
         waiter.waitForIt();
     }
 
-    @Test(timeOut = 400 + THRESHOLD, groups = "delays")
+    @Test(timeOut = 400 + THRESHOLD, groups = "timeoutPossible")
     void waiterShouldWaitFor400millisTime() {
         Waiter waiter = new Waiter(400);
         waiter.waitForIt();
     }
 
-    @Test(timeOut = THRESHOLD, groups = "delays")
+    @Test(timeOut = THRESHOLD, groups = "timeoutPossible")
     void waiterShouldNotWait() {
         Waiter waiter = new Waiter(0);
+        waiter.waitForIt();
+    }
+
+    @Test(groups = "timeoutPossible")
+    void negativeDelayShouldNotThrowException() {
+        Waiter waiter = new Waiter(-100);
         waiter.waitForIt();
     }
 
@@ -41,22 +48,22 @@ public class WaiterTest {
     void delayShouldStayTheSame(int score) {
         Waiter waiter = new Waiter(delay);
         waiter.speedTheGame(score);
-        Assert.assertEquals(waiter.getMilliseconds(), delay, "Delay should not decrease if there are no 10 additional points of scores");
-    }
-
-    @Test(groups = "delays")
-    void negativeDelayShouldNotThrowException() {
-        Waiter waiter = new Waiter(-100);
-        waiter.waitForIt();
+        assertEquals(waiter.getMilliseconds(), delay, "Game speed should not change if the score is not multiple of 10");
     }
 
     @Test(dataProvider = "variableDelays", groups = "delays")
     void delayShouldChangeBy100(int score) {
         Waiter waiter = new Waiter(delay);
         waiter.speedTheGame(score);
-        Assert.assertEquals(waiter.getMilliseconds(), delay - 100, "Delay should decrease every 10 points of scores");
+        assertEquals(waiter.getMilliseconds(), delay - 100, "Game speed should change if the score is multiple of 10");
     }
 
+    /**
+     * Helps to initialize delay variable with values (in milliseconds)
+     * when WaiterTest object is being constructed
+     *
+     * @return delay in milliseconds
+     */
     @DataProvider
     private static Object[][] dataMethod() {
         return new Object[][]{

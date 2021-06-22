@@ -76,6 +76,7 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <excludedGroups>jar</excludedGroups>
+                    <excludedGroups>timeoutPossible</excludedGroups>
                 </configuration>
             </plugin>
             <plugin>
@@ -90,7 +91,18 @@
                             <goal>integration-test</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
                 </executions>
+                <configuration>
+                    <includes>**/*WaiterTest.java</includes>
+                    <groups>timeoutPossible</groups>
+                </configuration>
+
             </plugin>
             <!--See src/test/java/com/epam/prejap/tetris/JARArchiveIT for why we need this-->
             <plugin>

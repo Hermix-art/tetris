@@ -3,9 +3,8 @@ package com.epam.prejap.tetris.game;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Causes delay between game iterations and speeds up game
- *
- * @author Herman Kulik
+ * Causes the delay between iterations in the game
+ * Speeds up the game
  */
 public class Waiter {
     private final int milliseconds;
