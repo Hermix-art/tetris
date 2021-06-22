@@ -7,52 +7,28 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 /**
- * Tests {@link Waiter} delays
+ * Tests delay changes in {@link Waiter}, depending on the score provided
  *
  * @author Herman Kulik
  */
+@Test(groups = "delays")
 public class WaiterTest {
-    private static final int THRESHOLD = 50;
     private static int delay;
 
     @Factory(dataProvider = "dataMethod")
-    WaiterTest(int newDelay) {
+    public WaiterTest(int newDelay) {
         delay = newDelay;
     }
 
-    @Test(timeOut = 500 + THRESHOLD, groups = "timeoutPossible")
-    void waiterShouldWaitFor500millisTime() {
-        Waiter waiter = new Waiter(500);
-        waiter.waitForIt();
-    }
-
-    @Test(timeOut = 400 + THRESHOLD, groups = "timeoutPossible")
-    void waiterShouldWaitFor400millisTime() {
-        Waiter waiter = new Waiter(400);
-        waiter.waitForIt();
-    }
-
-    @Test(timeOut = THRESHOLD, groups = "timeoutPossible")
-    void waiterShouldNotWait() {
-        Waiter waiter = new Waiter(0);
-        waiter.waitForIt();
-    }
-
-    @Test(groups = "timeoutPossible")
-    void negativeDelayShouldNotThrowException() {
-        Waiter waiter = new Waiter(-100);
-        waiter.waitForIt();
-    }
-
-    @Test(dataProvider = "constantDelays", groups = "delays")
-    void delayShouldStayTheSame(int score) {
+    @Test(dataProvider = "constantDelays")
+    public void delayShouldStayTheSame(int score) {
         Waiter waiter = new Waiter(delay);
         waiter.speedTheGame(score);
         assertEquals(waiter.getMilliseconds(), delay, "Game speed should not change if the score is not multiple of 10");
     }
 
-    @Test(dataProvider = "variableDelays", groups = "delays")
-    void delayShouldChangeBy100(int score) {
+    @Test(dataProvider = "variableDelays")
+    public void delayShouldChangeBy100(int score) {
         Waiter waiter = new Waiter(delay);
         waiter.speedTheGame(score);
         assertEquals(waiter.getMilliseconds(), delay - 100, "Game speed should change if the score is multiple of 10");
@@ -96,7 +72,6 @@ public class WaiterTest {
         };
     }
 
-
     @DataProvider
     private static Object[][] variableDelays() {
         return new Object[][]{
@@ -109,6 +84,4 @@ public class WaiterTest {
                 {70},
         };
     }
-
-
 }

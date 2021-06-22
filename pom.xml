@@ -6,7 +6,7 @@
 
     <groupId>com.epam.prejap</groupId>
     <artifactId>tetris</artifactId>
-    <version>0.10</version>
+    <version>0.11</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -90,18 +90,22 @@
                         <goals>
                             <goal>integration-test</goal>
                         </goals>
+                        <configuration>
+                            <groups>jar</groups>
+                        </configuration>
                     </execution>
                     <execution>
+                        <id>timeout-testing</id>
+                        <phase>integration-test</phase>
                         <goals>
                             <goal>integration-test</goal>
-                            <goal>verify</goal>
                         </goals>
+                        <configuration>
+                            <groups>timeoutPossible</groups>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <includes>**/*WaiterTest.java</includes>
-                    <groups>timeoutPossible</groups>
-                </configuration>
+
 
             </plugin>
             <!--See src/test/java/com/epam/prejap/tetris/JARArchiveIT for why we need this-->
