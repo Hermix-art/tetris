@@ -38,6 +38,7 @@ class Tetris {
 
             score++;
             waiter = waiter.speedTheGame(score);
+            playfield.findAndRemoveFilledLines();
         } while (moved);
 
         if (player instanceof HumanPlayer)
