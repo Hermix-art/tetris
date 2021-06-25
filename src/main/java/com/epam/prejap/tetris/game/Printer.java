@@ -1,17 +1,22 @@
 package com.epam.prejap.tetris.game;
 
+import com.epam.prejap.tetris.logger.Logger;
+
 import java.io.PrintStream;
 
 public class Printer {
+    private static final Logger LOGGER = Logger.getLogger(Printer.class);
 
     private final PrintStream out;
 
     public Printer(PrintStream out) {
         this.out = out;
+        LOGGER.trace("New {} object is created", getClass().getSimpleName());
     }
 
     void draw(Grid grid) {
         clear();
+        LOGGER.trace("Drawing the grid");
         border(grid.columnsNumber);
         for (Grid.Row line : grid.getLines()) {
             startRow();
@@ -22,6 +27,7 @@ public class Printer {
     }
 
     void clear() {
+        LOGGER.trace("Clearing the old grid");
         out.print("\u001b[2J\u001b[H");
     }
 
