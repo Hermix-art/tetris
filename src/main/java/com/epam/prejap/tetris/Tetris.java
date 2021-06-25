@@ -83,8 +83,14 @@ class Tetris {
         var game = new Tetris(playfield, new Waiter(delay), player);
 
         var score = game.play();
+
+        SavedScore savedScore = new SavedScore("score_list.json");
+        System.out.println(savedScore.toString());
+      
         LOGGER.trace("Printing the score");
         System.out.println("Score: " + score.points());
+        savedScore.writeSavedScore(score.points());
         LOGGER.info("Exiting te game");
+
     }
 }

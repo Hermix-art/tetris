@@ -17,6 +17,7 @@ public class Playfield {
     private Block block;
     private int row;
     private int col;
+    private Color color;
 
     public Playfield(int rows, int cols, BlockFeed feed, Printer printer) {
         this.rows = rows;
@@ -34,6 +35,7 @@ public class Playfield {
         row = 0;
         col = (cols - block.cols()) / 2;
         LOGGER.trace("Calling to draw the grid with a new block");
+        color = block.color();
         show();
     }
 
@@ -184,5 +186,4 @@ public class Playfield {
     private interface BrickAction {
         void act(int i, int j, int dot);
     }
-
 }

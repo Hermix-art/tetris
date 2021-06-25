@@ -1,12 +1,10 @@
 package com.epam.prejap.tetris.game;
 
 import com.epam.prejap.tetris.logger.Logger;
-
 import java.io.PrintStream;
 
 public class Printer {
     private static final Logger LOGGER = Logger.getLogger(Printer.class);
-
     private final PrintStream out;
 
     public Printer(PrintStream out) {
@@ -20,7 +18,7 @@ public class Printer {
         border(grid.columnsNumber);
         for (Grid.Row line : grid.getLines()) {
             startRow();
-            line.getRow().forEach(this::print);
+            line.getRow().stream().map(Integer::byteValue).forEach(this::print);
             endRow();
         }
         border(grid.columnsNumber);
@@ -31,8 +29,8 @@ public class Printer {
         out.print("\u001b[2J\u001b[H");
     }
 
-    void print(int dot) {
-        out.format(dot == 0 ? " " :"#");
+    void print(byte dot) {
+        out.format(dot == 0 ? " " :  Color.printHash(dot));
     }
 
     void startRow() {
@@ -46,4 +44,5 @@ public class Printer {
     void border(int width) {
         out.println("+" + "-".repeat(width) + "+");
     }
+
 }

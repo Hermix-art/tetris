@@ -1,5 +1,6 @@
 package com.epam.prejap.tetris.block;
 
+import com.epam.prejap.tetris.game.Color;
 import org.testng.annotations.DataProvider;
 
 import java.util.*;
@@ -19,32 +20,36 @@ public class BlocksShapesData {
      */
     private static final Map<Supplier<Block>, byte[][]> blocks = new LinkedHashMap<>() {{
         put(HBlock::new, new byte[][]{
-                {1, 0, 1},
-                {1, 1, 1},
-                {1, 0, 1}
-        });
-        put(IBlock::new, new byte[][]{
-                {1},
-                {1},
-                {1},
-                {1}
-        });
-        put(OBlock::new, new byte[][]{
-                {1, 1},
-                {1, 1}
+                {Color.CYAN.id, 0, Color.CYAN.id},
+                {Color.CYAN.id, Color.CYAN.id, Color.CYAN.id},
+                {Color.CYAN.id, 0, Color.CYAN.id}
         });
         put(SBlock::new, new byte[][]{
-                {0, 1, 1},
-                {1, 1, 0}
+                {0, Color.BLUE.id, Color.BLUE.id},
+                {Color.BLUE.id, Color.BLUE.id, 0}
+        });
+        put(OBlock::new, new byte[][]{
+                {Color.RED.id, Color.RED.id},
+                {Color.RED.id, Color.RED.id}
         });
         put(TBlock::new, new byte[][]{
-                {1, 1, 1},
-                {0, 1, 0}
+                {Color.GREEN.id, Color.GREEN.id, Color.GREEN.id},
+                {0, Color.GREEN.id, 0}
         });
         put(YBlock::new, new byte[][]{
-                {1, 0, 1},
-                {0, 1, 0},
-                {0, 1, 0}
+                {Color.YELLOW.id, 0, Color.YELLOW.id},
+                {0, Color.YELLOW.id, 0},
+                {0, Color.YELLOW.id, 0}
+        });
+        put(IBlock::new, new byte[][]{
+                {Color.PURPLE.id},
+                {Color.PURPLE.id},
+                {Color.PURPLE.id},
+                {Color.PURPLE.id}
+        });
+        put(ZBlock::new, new byte[][]{
+                {1, 1, 0},
+                {0, 1, 1}
         });
     }};
 

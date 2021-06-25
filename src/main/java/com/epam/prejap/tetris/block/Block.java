@@ -1,6 +1,7 @@
 package com.epam.prejap.tetris.block;
 
 import com.epam.prejap.tetris.logger.Logger;
+import com.epam.prejap.tetris.game.Color;
 
 public abstract class Block {
     private static final Logger LOGGER = Logger.getLogger(Block.class);
@@ -8,6 +9,7 @@ public abstract class Block {
     private final byte[][] image;
     private final int rows;
     private final int cols;
+    Color color = Color.WHITE;
 
     Block(byte[][] dots) {
         rows = dots.length;
@@ -28,7 +30,10 @@ public abstract class Block {
                     LOGGER.error("The dot value for block is less than 0. The block cannot be created");
                     throw new IllegalArgumentException("Invalid dot value");
                 }
-                image[i][j] = dot;
+                if(dot > 0){
+                    color = Color.getColorById(dot);
+                    image[i][j] = color.id;
+                }
             }
         }
     }
@@ -45,4 +50,7 @@ public abstract class Block {
         return image[i][j];
     }
 
+    public Color color() {
+        return color;
+    }
 }

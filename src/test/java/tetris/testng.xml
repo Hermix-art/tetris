@@ -11,20 +11,8 @@
             </run>
         </groups>
         <classes>
-            <class name="com.epam.prejap.tetris.block.BlocksShapesTest"/>
+            <class name="com.epam.prejap.tetris.block.BlockShapeTest"/>
         </classes>
-    </test>
-    <test verbose="2" name="Remove filled lines tests">
-        <groups>
-            <run>
-                <include name="gridTests"/>
-                <include name="playfieldClassTests"/>
-            </run>
-        </groups>
-    <classes>
-        <class name="com.epam.prejap.tetris.game.GridTest"/>
-        <class name="com.epam.prejap.tetris.game.PlayfieldTest"/>
-    </classes>
     </test>
     <test verbose="2" name="jar tests">
         <groups>
@@ -36,16 +24,6 @@
             <class name="com.epam.prejap.tetris.JARArchiveIT"/>
         </classes>
     </test>
-    <test verbose="2" name="Color tests">
-    <groups>
-        <run>
-            <include name="colors"/>
-    </run>
-    </groups>
-        <classes>
-            <class name="com.epam.prejap.tetris.game.ColorsTest"/>
-        </classes>
-  </test>
     <test name="Test playfield and human player">
         <groups>
             <run>
@@ -58,21 +36,6 @@
             <class name="com.epam.prejap.tetris.player.TestHumanPlayer"/>
         </classes>
     </test>
-  
-
-    <test verbose="2" name="delay tests">
-        <groups>
-            <run>
-                <include name="delays"/>
-                <include name="timeoutPossible"/>
-            </run>
-        </groups>
-        <classes>
-            <class name="com.epam.prejap.tetris.game.WaiterTest"/>
-            <class name="com.epam.prejap.tetris.game.WaiterTestIT"/>
-        </classes>
-    </test>
-
     <test name="Group tests For SavedScore Integration Test Class">
         <groups>
             <run>

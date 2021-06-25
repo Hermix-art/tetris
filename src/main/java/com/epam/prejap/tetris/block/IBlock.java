@@ -1,6 +1,7 @@
 package com.epam.prejap.tetris.block;
 
 import com.epam.prejap.tetris.logger.Logger;
+import com.epam.prejap.tetris.game.Color;
 
 /**
  *  It creates I block of tetris
@@ -11,9 +12,10 @@ import com.epam.prejap.tetris.logger.Logger;
  */
 final class IBlock extends Block {
     private static final Logger LOGGER = Logger.getLogger(IBlock.class);
+    private static final byte COLOR_ID = Color.PURPLE.id;
 
     /**
-     * Byte array represents "S" block.
+     * Byte array represents "I" block.
      * In game will be displayed as (between lines):
      *  -------------------
      *       #
@@ -23,10 +25,10 @@ final class IBlock extends Block {
      *  -------------------
      */
     private static final byte [][] IMAGE = {
-            {1},
-            {1},
-            {1},
-            {1},
+            {COLOR_ID},
+            {COLOR_ID},
+            {COLOR_ID},
+            {COLOR_ID},
     };
     public IBlock(){
         super(IMAGE);
