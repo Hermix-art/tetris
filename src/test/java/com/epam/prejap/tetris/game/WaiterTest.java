@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 /**
- * Tests delay changes in {@link Waiter}, depending on the score provided
+ * Tests if delay changes in {@link Waiter}, when score is multiple or not multiple of 10
  *
  * @author Herman Kulik
  */
@@ -23,14 +23,14 @@ public class WaiterTest {
     @Test(dataProvider = "constantDelays")
     public void delayShouldStayTheSame(int score) {
         Waiter waiter = new Waiter(delay);
-        waiter.speedTheGame(score);
+        waiter = waiter.speedTheGame(score);
         assertEquals(waiter.getMilliseconds(), delay, "Game speed should not change if the score is not multiple of 10");
     }
 
     @Test(dataProvider = "variableDelays")
     public void delayShouldChangeBy100(int score) {
         Waiter waiter = new Waiter(delay);
-        waiter.speedTheGame(score);
+        waiter = waiter.speedTheGame(score);
         assertEquals(waiter.getMilliseconds(), delay - 100, "Game speed should change if the score is multiple of 10");
     }
 

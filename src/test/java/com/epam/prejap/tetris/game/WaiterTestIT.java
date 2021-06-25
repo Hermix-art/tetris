@@ -3,7 +3,7 @@ package com.epam.prejap.tetris.game;
 import org.testng.annotations.Test;
 
 /**
- * Tests if methods are executed within the time provided in {@link Waiter}
+ * Tests if 'waitForIt()' method is executed within the time provided in the constructor of {@link Waiter}
  *
  * @author Herman Kulik
  */

@@ -11,7 +11,7 @@ import com.epam.prejap.tetris.player.RandomPlayer;
 
 class Tetris {
     private final Playfield playfield;
-    private final Waiter waiter;
+    private Waiter waiter;
     private final Player player;
 
     public Tetris(Playfield playfield, Waiter waiter, Player player) {
@@ -37,7 +37,7 @@ class Tetris {
             } while (nextMove);
 
             score++;
-            waiter.speedTheGame(score);
+            waiter = waiter.speedTheGame(score);
         } while (moved);
 
         if (player instanceof HumanPlayer)

@@ -4,52 +4,51 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Causes the delay between iterations in the game
- * Speeds up the game
  */
 public class Waiter {
     private final int milliseconds;
-    private int adjustment;
 
     /**
-     * Initializes a Waiter with starting delay value in milliseconds
+     * Initializes a Waiter with a delay value in milliseconds
      *
-     * @param milliseconds starting value of delay in milliseconds
+     * @param milliseconds value of delay in milliseconds
      */
     public Waiter(int milliseconds) {
         this.milliseconds = milliseconds;
     }
 
     /**
-     * Provides a delay, making executing thread sleep for preliminary milliseconds quantity, decreased by current adjustment
-     * set by {@link #speedTheGame(int)}
+     * Provides a delay, making executing thread sleep for milliseconds quantity provided via constructor
      */
     public void waitForIt() {
         try {
-            TimeUnit.MILLISECONDS.sleep(milliseconds - adjustment);
-        } catch (InterruptedException ignore) {
+            TimeUnit.MILLISECONDS.sleep(milliseconds);
+        } catch (InterruptedException toBeLogged) {
+            //todo  log the exception info
         }
     }
 
     /**
-     * Increases adjustment in milliseconds by 100 milliseconds every 10 points
-     * what leads to delay increase between cycles of the game when {@link #waitForIt()} method is invoked
+     * Returns a new Waiter object, initialized with the delay value decreased by 100 ms, if score is multiple of 10
+     * otherwise returns the same object
      *
      * @param score current score of the game
-     * @implNote adjustment may be increased only if potentially adjusted delay is higher or equals to 100 milliseconds,
+     * @return new Waiter object or the same object
+     * @implNote new Waiter object may be returned only if current delay value is higher or equals to 100 milliseconds,
      * as delay cannot be negative
      */
-    public void speedTheGame(int score) {
-        if ((score % 10) == 0 && (milliseconds - adjustment) >= 100) {
-            adjustment += 100;
-        }
+    public Waiter speedTheGame(int score) {
+        if ((score % 10) == 0 && (milliseconds) >= 100) {
+            return new Waiter(milliseconds - 100);
+        } else return this;
     }
 
     /**
-     * Returns adjusted delay value in milliseconds
+     * Returns delay in milliseconds
      *
      * @return milliseconds
      */
     int getMilliseconds() {
-        return milliseconds - adjustment;
+        return milliseconds;
     }
 }
